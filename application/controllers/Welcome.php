@@ -22,11 +22,4 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
-
-	public function getUser(){
-		$this -> load -> model('user');
-		$data = $this -> user -> getUser();
-		header('Content-type: application/json');
-		echo json_encode($data);
-	}
 }
