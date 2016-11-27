@@ -33,13 +33,20 @@ class Services extends CI_Controller {
             }
 
         }
-/*
-        public function getUserbyId(){
-            $id = $this -> input -> post('id');
-            $this -> load -> model('user');
+
+        public function deleteDate(){
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
             header('Content-type: application/json');
-            $data = $this -> user -> getUserbyId($id);
-            
-            echo json_encode($data);
-        }*/
+
+            $postdata = file_get_contents("php://input");
+            if (isset($postdata)) {
+                $request = json_decode($postdata);
+                $id = array('id_citas' => $request -> id);
+
+                $this -> load -> model('service');
+                $data = $this -> service -> deleteDate($id);
+                echo json_encode($data);
+            }
+        }
 }

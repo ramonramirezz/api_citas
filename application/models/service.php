@@ -9,7 +9,7 @@ class Service extends CI_Model{
     }
 
     function getServices(){
-        $query = $this->db->get('servicios');
+        $query = $this -> db -> get('servicios');
         return $query->result_array();
     }
 
@@ -21,16 +21,16 @@ class Service extends CI_Model{
             'fecha' => $date -> date,
             'hora' => $date -> hour
         );
-        $this->db->insert('citas', $data);
+        $this -> db -> insert('citas', $data);
         $result = array('messagges' => "Se a agregado una cita");
         return $result;
     }
 
-/*    public function getUserbyId($id){
-        $this -> db -> where('id_usuario', $id);
-        $query = $this -> db -> get('usuarios');
-        return $query->row();
-    }*/
+    function deleteDate($id){
+        $this -> db -> delete('citas', $id);
+        $result = array('messagges' => 'Se a eliminado su cita');
+        return $result;
+    }
 
 
 }
