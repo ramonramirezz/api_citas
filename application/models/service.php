@@ -32,5 +32,14 @@ class Service extends CI_Model{
         return $result;
     }
 
+    function getDatesOfService($date = '', $service = ''){
+        $this -> db -> select('id_citas, hora');
+        $this -> db -> where('fecha', $date);
+        $this -> db -> where('id_servicio', $service);
+
+        $query = $this -> db -> get('citas');
+        return $query -> result_array();
+    }
+
 
 }

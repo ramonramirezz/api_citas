@@ -49,4 +49,21 @@ class Services extends CI_Controller {
                 echo json_encode($data);
             }
         }
+
+        public function getDatesOfService(){
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+            header('Content-type: application/json');
+
+            $postdata = file_get_contents("php://input");
+            if (isset($postdata)) {
+                $request = json_decode($postdata);
+                $date = $request -> date;
+                $service = $request -> service;
+
+                $this -> load -> model('service');
+                $data = $this -> service -> getDatesOfService($date, $service);
+                echo json_encode($data);
+            }         
+        }
 }
