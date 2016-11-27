@@ -10,22 +10,24 @@ class Senssions extends CI_Controller {
         }
 
     public function goLogin(){
-            $username = $this -> input -> post('username');
-            $password = $this -> input -> post('password');
-
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
             header('Content-type: application/json');
-            $this -> load -> model('login');
-            $data = $this -> login -> login($username, $password);
-            //sentence to cheek if si a local request @return JSON FORMAT
-         if ($this->input->is_ajax_request()){
-               echo json_encode($data);
-         }
-         //sentence to cheek if is a cross domain request @return JSNOP FORMAT
-         if (isset($_GET['callback'])) {
-             echo  $_GET['callback'].'('.json_encode($data) .')';
-         }
-         // REDIRECT user if is not one of this options before.
-        
+            /*$username = $this -> input -> post('username');
+            $password = $this -> input -> post('password');*/
+
+            $postdata = file_get_contents("php://input");
+            if (isset($postdata)) {
+                $request = json_decode($postdata);
+                $username = $request->username;
+                $password = $request->password;
+                
+                $this -> load -> model('login');
+                $data = $this -> login -> login($username, $password);
+                echo json_encode($data);
+            }
+
+            
     }
 
          

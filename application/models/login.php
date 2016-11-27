@@ -28,11 +28,13 @@ class Login extends CI_Model{
         if (isset($row)){
             $req['idUser'] = $row -> id_usuario;
             $req['name'] = $row -> nombre_usuario;
-        }
-        
 
-        foreach ($query -> result_array() as &$item) {
-            array_push($req['dates'], $item);
+            foreach ($query -> result_array() as &$item) {
+                array_push($req['dates'], $item);
+            }
+
+        }else{
+            $req = array('messagges' => 'Usuario no encontrado');
         }
 
         return $req;
