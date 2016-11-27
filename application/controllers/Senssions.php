@@ -13,8 +13,6 @@ class Senssions extends CI_Controller {
             header("Access-Control-Allow-Origin: *");
             header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
             header('Content-type: application/json');
-            /*$username = $this -> input -> post('username');
-            $password = $this -> input -> post('password');*/
 
             $postdata = file_get_contents("php://input");
             if (isset($postdata)) {
